@@ -2,14 +2,15 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as OptionsChrome
 from selenium.webdriver.firefox.options import Options as OptionsFirefox
-import time
+
 
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default='chrome',
                      help="Choose browser: chrome or firefox")
 
     parser.addoption('--language', action='store', default='ru',
-                         help="Choose language: '--language=en' or '--language=ru'")
+                     help="Choose language: '--language=en' or '--language=ru'")
+
 
 @pytest.fixture()
 def browser(request):
@@ -25,6 +26,5 @@ def browser(request):
         options_firefox.set_preference("intl.accept_languages", user_language)
         driver = webdriver.Firefox(options=options_firefox)
     driver.maximize_window()
-    # driver.implicitly_wait(5)
     yield driver
     driver.quit()
