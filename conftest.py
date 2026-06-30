@@ -20,6 +20,10 @@ def browser(request):
     if browser_name == "chrome":
         options_chrome = OptionsChrome()
         options_chrome.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+        options_chrome.add_argument("--headless")
+        options_chrome.add_argument("--window-size=1920,1080")
+        options_chrome.add_argument("--no-sandbox")
+        options_chrome.add_argument("--disable-dev-shm-usage")
         driver = webdriver.Chrome(options=options_chrome)
     elif browser_name == "firefox":
         options_firefox = OptionsFirefox()
